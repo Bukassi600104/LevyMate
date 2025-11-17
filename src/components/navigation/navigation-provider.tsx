@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { useAppStore } from '@/store/app-store'
 
@@ -10,26 +10,26 @@ export function NavigationProvider({ children }: { children: React.ReactNode }) 
   const router = useRouter()
 
   // Map tabs to routes
-  const tabToRoute: Record<string, string> = {
+  const tabToRoute = useMemo(() => ({
     dashboard: '/',
     add: '/add',
     tax: '/tax',
     learn: '/learn',
     profile: '/profile',
-  }
+  }), [])
 
   // Route to tab mapping
-  const routeToTab: Record<string, string> = {
+  const routeToTab = useMemo(() => ({
     '/': 'dashboard',
     '/add': 'add',
     '/tax': 'tax',
     '/learn': 'learn',
     '/profile': 'profile',
-  }
+  }), [])
 
   useEffect(() => {
     // Update active tab based on current route
-    const currentTab = routeToTab[pathname]
+    const currentTab = routeToTab[pathname as keyof typeof routeToTab]
     if (currentTab) {
       setActiveTab(currentTab)
     }
@@ -37,7 +37,7 @@ export function NavigationProvider({ children }: { children: React.ReactNode }) 
 
   useEffect(() => {
     // Navigate when active tab changes
-    const route = tabToRoute[activeTab]
+    const route = tabToRoute[activeTab as keyof typeof tabToRoute]
     if (route && pathname !== route) {
       router.push(route)
     }
