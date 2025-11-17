@@ -1,14 +1,19 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { useAppStore } from '@/store/app-store'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Plus, Minus } from 'lucide-react'
 
 export function AddTransactionForm() {
+  const searchParams = useSearchParams()
   const { addIncome, addExpense } = useAppStore()
-  const [transactionType, setTransactionType] = useState<'income' | 'expense'>('income')
+  const typeFromUrl = searchParams.get('type') as 'income' | 'expense' | null
+  const [transactionType, setTransactionType] = useState<'income' | 'expense'>(
+    typeFromUrl === 'expense' ? 'expense' : 'income'
+  )
   const [formData, setFormData] = useState({
     amount: '',
     category: '',
