@@ -13,7 +13,7 @@ import {
   Tag,
   FileText,
 } from 'lucide-react'
-import { TransactionAttachment } from '@/types'
+import { TransactionAttachment, IncomeCategory } from '@/types'
 
 interface UnifiedTransaction {
   id: string
@@ -206,7 +206,11 @@ export function TransactionsPage() {
 
     if (transaction.type === 'income') {
       updateIncome(transaction.id, {
-        ...updatedFields,
+        amount: updatedFields.amount,
+        category: updatedFields.category as IncomeCategory,
+        notes: updatedFields.notes,
+        tags: updatedFields.tags,
+        isBusiness: updatedFields.isBusiness,
       })
     } else {
       updateExpense(transaction.id, {
