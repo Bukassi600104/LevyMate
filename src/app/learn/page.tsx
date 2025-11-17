@@ -3,13 +3,8 @@ import { LearningHub } from '@/components/learning/learning-hub'
 
 export default function LearnPage() {
   return (
-    <MobileLayout>
-      <div className="px-4 pb-20">
-        <header className="py-6">
-          <h1 className="text-2xl font-bold text-foreground">Learning Hub</h1>
-          <p className="text-muted-foreground mt-1">Learn about Nigerian taxes</p>
-        </header>
-        
+    <MobileLayout title="Learn" subtitle="Tax education and resources for Nigerian microbusinesses">
+      <div className="pb-20 md:pb-0">
         <LearningHub />
       </div>
     </MobileLayout>
