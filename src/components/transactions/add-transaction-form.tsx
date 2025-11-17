@@ -52,7 +52,16 @@ export function AddTransactionForm() {
     typeFromUrl === 'expense' ? 'expense' : 'income'
   )
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    amount: string
+    category: string
+    source: string
+    description: string
+    date: string
+    paymentMethod: (typeof paymentMethods)[number]
+    isBusiness: boolean
+    isDeductible: boolean
+  }>({
     amount: '',
     category: '',
     source: '',
