@@ -1,22 +1,12 @@
 'use client'
 
 import { useEffect, useMemo } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { useAppStore } from '@/store/app-store'
 
 export function NavigationProvider({ children }: { children: React.ReactNode }) {
-  const { activeTab, setActiveTab } = useAppStore()
+  const { setActiveTab } = useAppStore()
   const pathname = usePathname()
-  const router = useRouter()
-
-  // Map tabs to routes
-  const tabToRoute = useMemo(() => ({
-    dashboard: '/',
-    add: '/add',
-    tax: '/tax',
-    learn: '/learn',
-    profile: '/profile',
-  }), [])
 
   // Route to tab mapping
   const routeToTab = useMemo(() => ({
@@ -28,20 +18,12 @@ export function NavigationProvider({ children }: { children: React.ReactNode }) 
   }), [])
 
   useEffect(() => {
-    // Update active tab based on current route
+    // Update active tab based on current route (one-way sync)
     const currentTab = routeToTab[pathname as keyof typeof routeToTab]
     if (currentTab) {
       setActiveTab(currentTab)
     }
   }, [pathname, setActiveTab, routeToTab])
-
-  useEffect(() => {
-    // Navigate when active tab changes
-    const route = tabToRoute[activeTab as keyof typeof tabToRoute]
-    if (route && pathname !== route) {
-      router.push(route)
-    }
-  }, [activeTab, router, pathname, tabToRoute])
 
   return <>{children}</>
 }
