@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { isOnline, onOfflineStatusChange } from '@/lib/storage'
 
 /**
@@ -111,13 +111,13 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
  * Hook for previous value
  */
 export function usePrevious<T>(value: T): T | undefined {
-  const ref = useState<T | undefined>()
+  const ref = useRef<T | undefined>(undefined)
 
   useEffect(() => {
-    ref[1](value)
+    ref.current = value
   }, [value])
 
-  return ref[0]
+  return ref.current
 }
 
 /**
