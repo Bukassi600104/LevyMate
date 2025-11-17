@@ -1,4 +1,4 @@
-import { TaxRules, PitBand, TaxCalculation } from '@/types'
+import { TaxRules, PitBand, TaxCalculation, TaxCalculationBandBreakdown } from '@/types'
 
 export type { TaxRules, PitBand, TaxCalculation }
 
@@ -20,33 +20,56 @@ export function computePIT(
 ): TaxCalculation {
   const rentRel = rentDeduction(annualRentPaid, rules)
   const taxableIncome = computeTaxableIncome(totalIncome, deductibleExpenses + rentRel)
-  
+
   let remaining = taxableIncome
   let tax = 0.0
-  
+  const breakdown: TaxCalculationBandBreakdown[] = []
+
   for (const band of rules.pitBands) {
-    const bandFrom = band.bandFrom
-    const bandTo = band.bandTo || Infinity
-    const bandWidth = bandTo - bandFrom
-    
-    if (taxableIncome <= bandFrom) {
-      break
-    }
-    
-    const amountInBand = Math.min(remaining, bandWidth > 0 ? bandWidth : 0)
-    tax += amountInBand * band.rate
-    remaining -= amountInBand
-    
     if (remaining <= 0) {
       break
     }
+
+    const bandFrom = band.bandFrom
+    const bandTo = band.bandTo ?? Infinity
+
+    if (taxableIncome <= bandFrom) {
+      continue
+    }
+
+    const availableInBand = bandTo - bandFrom
+    const taxablePortion = band.bandTo === null ? remaining : Math.min(remaining, Math.max(availableInBand, 0))
+    if (taxablePortion <= 0) {
+      continue
+    }
+
+    const taxForBand = taxablePortion * band.rate
+    tax += taxForBand
+    remaining -= taxablePortion
+
+    breakdown.push({
+      bandFrom,
+      bandTo: band.bandTo,
+      rate: band.rate,
+      taxableAmount: Math.round(taxablePortion),
+      taxForBand: Math.round(taxForBand),
+    })
   }
-  
+
+  const roundedTax = Math.max(0, Math.round(tax))
+  const monthlyTax = roundedTax / 12
+  const quarterlyTax = roundedTax / 4
+  const effectiveRate = totalIncome > 0 ? roundedTax / totalIncome : 0
+
   return {
     taxableIncome,
-    taxDue: Math.round(tax),
+    taxDue: roundedTax,
     rentRelief: rentRel,
-    ruleVersion: rules.version
+    ruleVersion: rules.version,
+    bandBreakdown: breakdown,
+    monthlyTax: Math.round(monthlyTax),
+    quarterlyTax: Math.round(quarterlyTax),
+    effectiveTaxRate: Math.round(effectiveRate * 1000) / 1000,
   }
 }
 
@@ -69,17 +92,17 @@ export function estimateBusinessTax(
   rules: TaxRules
 ) {
   const profit = annualTurnover - cogs - deductibleOps
-  
+
   if (ownerProfile === 'sole_proprietor') {
     return {
       profit,
-      personalTax: computePIT(profit, 0, 0, rules)
+      personalTax: computePIT(profit, 0, 0, rules),
     }
   } else {
-    const corporateRate = 0.30
+    const corporateRate = 0.3
     return {
       profit,
-      corporateEstimatedTax: profit * corporateRate
+      corporateEstimatedTax: profit * corporateRate,
     }
   }
 }

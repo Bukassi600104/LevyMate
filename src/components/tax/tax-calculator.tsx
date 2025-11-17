@@ -1,10 +1,10 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useAppStore } from '@/store/app-store'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { computePIT, TaxRules } from '@/lib/tax-engine'
+import { computePIT, TaxRules, TaxCalculation } from '@/lib/tax-engine'
 import taxRulesJson from '@/data/tax-rules.json'
 import { Calculator, TrendingUp } from 'lucide-react'
 
@@ -15,168 +15,176 @@ export function TaxCalculator() {
     deductibleExpenses: '',
     annualRent: '',
   })
-  const [calculation, setCalculation] = useState<any>(null)
+  const [calculation, setCalculation] = useState<TaxCalculation | null>(null)
+
+  const taxRules = useMemo<TaxRules>(() => ({
+    version: taxRulesJson.version,
+    pitBands: taxRulesJson.pit_bands.map((band) => ({
+      bandFrom: band.band_from,
+      bandTo: band.band_to,
+      rate: band.rate,
+    })),
+    rentRelief: taxRulesJson.rent_relief,
+  }), [])
 
   const handleCalculate = () => {
     const annualIncome = parseFloat(formData.annualIncome) || 0
     const deductibleExpenses = parseFloat(formData.deductibleExpenses) || 0
     const annualRent = parseFloat(formData.annualRent) || 0
 
-    // Transform JSON data to match TaxRules interface
-    const taxRules: TaxRules = {
-      version: taxRulesJson.version,
-      pitBands: taxRulesJson.pit_bands.map(band => ({
-        bandFrom: band.band_from,
-        bandTo: band.band_to,
-        rate: band.rate
-      })),
-      rentRelief: taxRulesJson.rent_relief
-    }
-
-    const result = computePIT(
-      annualIncome,
-      deductibleExpenses,
-      annualRent,
-      taxRules
-    )
-
+    const result = computePIT(annualIncome, deductibleExpenses, annualRent, taxRules)
     setCalculation(result)
   }
 
-  // Calculate from actual data
   const currentYearIncome = incomes.reduce((sum, income) => sum + income.amount, 0)
-  const currentYearExpenses = expenses
-    .filter(exp => exp.isDeductible)
+  const currentYearDeductible = expenses
+    .filter((expense) => expense.isDeductible)
     .reduce((sum, expense) => sum + expense.amount, 0)
 
   return (
     <div className="space-y-6">
-      {/* Quick Calculation from Data */}
       {incomes.length > 0 && (
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
-              <TrendingUp className="w-5 h-5" />
-              <span>Based on Your Data</span>
+              <TrendingUp className="h-5 w-5" />
+              <span>Based on your tracked data</span>
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              <div className="flex justify-between">
-                <span className="text-gray-600">Total Income:</span>
-                <span className="font-medium">₦{currentYearIncome.toLocaleString()}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-600">Deductible Expenses:</span>
-                <span className="font-medium">₦{currentYearExpenses.toLocaleString()}</span>
-              </div>
-              <Button 
-                onClick={() => {
-                  setFormData({
-                    annualIncome: currentYearIncome.toString(),
-                    deductibleExpenses: currentYearExpenses.toString(),
-                    annualRent: '',
-                  })
-                }}
-                variant="outline"
-                className="w-full"
-              >
-                Use This Data
-              </Button>
+          <CardContent className="space-y-3">
+            <div className="flex items-center justify-between text-sm">
+              <span className="text-gray-600">Year-to-date income</span>
+              <span className="font-semibold">₦{currentYearIncome.toLocaleString()}</span>
             </div>
+            <div className="flex items-center justify-between text-sm">
+              <span className="text-gray-600">Tax-deductible expenses</span>
+              <span className="font-semibold">₦{currentYearDeductible.toLocaleString()}</span>
+            </div>
+            <Button
+              variant="outline"
+              className="w-full"
+              onClick={() =>
+                setFormData({
+                  annualIncome: currentYearIncome.toString(),
+                  deductibleExpenses: currentYearDeductible.toString(),
+                  annualRent: '',
+                })
+              }
+            >
+              Use this data
+            </Button>
           </CardContent>
         </Card>
       )}
 
-      {/* Manual Calculation */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center space-x-2">
-            <Calculator className="w-5 h-5" />
-            <span>Manual Calculation</span>
+            <Calculator className="h-5 w-5" />
+            <span>Personal Income Tax calculator</span>
           </CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {/* Annual Income */}
+        <CardContent className="space-y-4">
+          <div className="grid gap-4 md:grid-cols-2">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Annual Income (₦)
-              </label>
+              <label className="mb-1 block text-sm font-medium text-gray-700">Annual income (₦)</label>
               <input
                 type="number"
                 value={formData.annualIncome}
-                onChange={(e) => setFormData({ ...formData, annualIncome: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                onChange={(event) => setFormData((prev) => ({ ...prev, annualIncome: event.target.value }))}
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-primary focus:ring-primary"
                 placeholder="0.00"
               />
             </div>
-
-            {/* Deductible Expenses */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Deductible Expenses (₦)
-              </label>
+              <label className="mb-1 block text-sm font-medium text-gray-700">Deductible expenses (₦)</label>
               <input
                 type="number"
                 value={formData.deductibleExpenses}
-                onChange={(e) => setFormData({ ...formData, deductibleExpenses: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                onChange={(event) =>
+                  setFormData((prev) => ({ ...prev, deductibleExpenses: event.target.value }))
+                }
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-primary focus:ring-primary"
                 placeholder="0.00"
               />
             </div>
-
-            {/* Annual Rent */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Annual Rent (₦)
-              </label>
+              <label className="mb-1 block text-sm font-medium text-gray-700">Annual rent (₦)</label>
               <input
                 type="number"
                 value={formData.annualRent}
-                onChange={(e) => setFormData({ ...formData, annualRent: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                onChange={(event) => setFormData((prev) => ({ ...prev, annualRent: event.target.value }))}
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-primary focus:ring-primary"
                 placeholder="0.00"
               />
             </div>
-
-            <Button onClick={handleCalculate} className="w-full">
-              Calculate Tax
-            </Button>
           </div>
+          <Button className="w-full" onClick={handleCalculate}>
+            Calculate tax
+          </Button>
         </CardContent>
       </Card>
 
-      {/* Results */}
       {calculation && (
         <Card>
           <CardHeader>
-            <CardTitle>Tax Calculation Results</CardTitle>
+            <CardTitle>Tax estimate</CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="p-4 bg-blue-50 rounded-lg">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-gray-600">Taxable Income:</span>
-                  <span className="font-medium">₦{calculation.taxableIncome.toLocaleString()}</span>
-                </div>
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-gray-600">Rent Relief:</span>
-                  <span className="font-medium text-green-600">-₦{calculation.rentRelief.toLocaleString()}</span>
-                </div>
-                <div className="border-t pt-2 mt-2">
-                  <div className="flex justify-between items-center">
-                    <span className="font-semibold">Estimated Tax:</span>
-                    <span className="font-bold text-lg text-primary">₦{calculation.taxDue.toLocaleString()}</span>
-                  </div>
-                </div>
+          <CardContent className="space-y-6">
+            <div className="grid gap-4 md:grid-cols-3">
+              <div className="rounded-xl bg-primary/10 p-4">
+                <p className="text-xs uppercase tracking-wide text-primary">Annual</p>
+                <p className="mt-1 text-2xl font-semibold text-primary">
+                  ₦{calculation.taxDue.toLocaleString()}
+                </p>
+                <p className="mt-1 text-xs text-primary/80">Rule {calculation.ruleVersion}</p>
               </div>
-              
-              <div className="text-xs text-gray-500 text-center">
-                <p>Calculated using rule {calculation.ruleVersion}</p>
-                <p className="mt-1">This is an estimate for educational purposes only</p>
+              <div className="rounded-xl border border-gray-100 p-4">
+                <p className="text-xs uppercase tracking-wide text-gray-500">Monthly set-aside</p>
+                <p className="mt-1 text-xl font-semibold text-gray-900">
+                  ₦{(calculation.monthlyTax ?? 0).toLocaleString()}
+                </p>
+                <p className="text-xs text-gray-500">Effective tax rate: {((calculation.effectiveTaxRate ?? 0) * 100).toFixed(1)}%</p>
+              </div>
+              <div className="rounded-xl border border-gray-100 p-4">
+                <p className="text-xs uppercase tracking-wide text-gray-500">Quarterly</p>
+                <p className="mt-1 text-xl font-semibold text-gray-900">
+                  ₦{(calculation.quarterlyTax ?? 0).toLocaleString()}
+                </p>
+                <p className="text-xs text-gray-500">Rent relief: ₦{calculation.rentRelief.toLocaleString()}</p>
               </div>
             </div>
+
+            {calculation.bandBreakdown && calculation.bandBreakdown.length > 0 && (
+              <div>
+                <h3 className="text-sm font-semibold text-gray-700">Band-by-band breakdown</h3>
+                <div className="mt-3 space-y-2 rounded-xl border border-gray-100 bg-gray-50 p-4 text-sm">
+                  {calculation.bandBreakdown.map((band, index) => (
+                    <div key={index} className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium text-gray-800">
+                          ₦{band.bandFrom.toLocaleString()} -{' '}
+                          {band.bandTo ? `₦${band.bandTo.toLocaleString()}` : 'above'}
+                        </p>
+                        <p className="text-xs text-gray-500">Rate {(band.rate * 100).toFixed(1)}%</p>
+                      </div>
+                      <div className="text-right text-sm">
+                        <p className="font-semibold text-gray-900">
+                          Tax: ₦{band.taxForBand.toLocaleString()}
+                        </p>
+                        <p className="text-xs text-gray-500">
+                          Taxable: ₦{band.taxableAmount.toLocaleString()}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <p className="text-xs text-center text-gray-500">
+              LevyMate uses Nigeria’s 2025 PIT bands for educational estimates. Consult a tax professional for official filings.
+            </p>
           </CardContent>
         </Card>
       )}

@@ -4,13 +4,8 @@ import { AddTransactionForm } from '@/components/transactions/add-transaction-fo
 
 export default function AddPage() {
   return (
-    <MobileLayout>
-      <div className="px-4 pb-20">
-        <header className="py-6">
-          <h1 className="text-2xl font-bold text-foreground">Add Transaction</h1>
-          <p className="text-muted-foreground mt-1">Record your income or expenses</p>
-        </header>
-
+    <MobileLayout title="Add transaction" subtitle="Record income, expenses, and receipt uploads">
+      <div className="pb-20 md:pb-0">
         <Suspense
           fallback={
             <div className="py-6 text-center text-muted-foreground">
