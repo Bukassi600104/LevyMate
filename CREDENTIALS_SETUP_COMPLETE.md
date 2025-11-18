@@ -3,7 +3,7 @@
 ## 🎯 Status: READY FOR VERCEL DEPLOYMENT
 
 **Generated**: November 18, 2025  
-**Project**: LevyMate (mipyakisywdofczqaxlb)  
+**Project**: LevyMate (<YOUR_SUPABASE_PROJECT_ID>)  
 **Status**: ✅ All credentials configured and verified
 
 ---
@@ -23,25 +23,25 @@
 
 ### Database Connection
 ```
-Host: db.mipyakisywdofczqaxlb.supabase.co
-Port: 5432
-User: postgres
-Password: $Arianna600104#
-Database: postgres
+Host: <YOUR_DB_HOST>
+Port: <YOUR_DB_PORT>
+User: <YOUR_DB_USER>
+Password: <YOUR_DB_PASSWORD>
+Database: <YOUR_DB_NAME>
 SSL: Required
 ```
 
 ### Supabase Project
 ```
-Project ID: mipyakisywdofczqaxlb
-Project URL: https://mipyakisywdofczqaxlb.supabase.co
-Anon Key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1pcHlha2lzeXdkb2ZjenFheGxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMzOTIyMDgsImV4cCI6MjA3ODk2ODIwOH0.58008bNoWN5NWl_RyG2bpTxq0CFMrH-FBF20driila0
+Project ID: <YOUR_SUPABASE_PROJECT_ID>
+Project URL: https://<YOUR_SUPABASE_PROJECT_ID>.supabase.co
+Anon Key: <YOUR_SUPABASE_ANON_KEY>
 ```
 
 ### Generated Secrets
 ```
-JWT_SECRET: YyJ4jArSdu1ERU/gV7fi9ZtvIx/SQXxhRoSnXzQlT58PEmX1q2IhC/aS415zKOBB
-WEBHOOK_SECRET: vEwvShd1PLbd9quEnAzIw/J2cy4kYCgjSR/WyAXD8+5yJZbrIJROIYCiiPA0iwvn
+JWT_SECRET: <GENERATED_JWT_SECRET>
+WEBHOOK_SECRET: <GENERATED_WEBHOOK_SECRET>
 ```
 
 ---
@@ -65,23 +65,23 @@ Copy and paste each variable one by one:
 
 ```
 DB_HOST
-Value: db.mipyakisywdofczqaxlb.supabase.co
+Value: <YOUR_DB_HOST>
 Environments: Production, Preview
 
 DB_PORT
-Value: 5432
+Value: <YOUR_DB_PORT>
 Environments: Production, Preview
 
 DB_USER
-Value: postgres
+Value: <YOUR_DB_USER>
 Environments: Production, Preview
 
 DB_PASSWORD
-Value: $Arianna600104#
+Value: <YOUR_DB_PASSWORD>
 Environments: Production, Preview
 
 DB_NAME
-Value: postgres
+Value: <YOUR_DB_NAME>
 Environments: Production, Preview
 
 DB_SSL
@@ -89,27 +89,27 @@ Value: true
 Environments: Production, Preview
 
 DATABASE_URL
-Value: postgresql://postgres:%24Arianna600104%23@db.mipyakisywdofczqaxlb.supabase.co:5432/postgres?sslmode=require
+Value: postgresql://<YOUR_DB_USER>:<URL_ENCODED_DB_PASSWORD>@<YOUR_DB_HOST>:<YOUR_DB_PORT>/<YOUR_DB_NAME>?sslmode=require
 Environments: Production, Preview
 
 SUPABASE_URL
-Value: https://mipyakisywdofczqaxlb.supabase.co
+Value: https://<YOUR_SUPABASE_PROJECT_ID>.supabase.co
 Environments: Production, Preview
 
 SUPABASE_ANON_KEY
-Value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1pcHlha2lzeXdkb2ZjenFheGxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMzOTIyMDgsImV4cCI6MjA3ODk2ODIwOH0.58008bNoWN5NWl_RyG2bpTxq0CFMrH-FBF20driila0
+Value: <YOUR_SUPABASE_ANON_KEY>
 Environments: Production, Preview
 
 NEXT_PUBLIC_SUPABASE_URL
-Value: https://mipyakisywdofczqaxlb.supabase.co
+Value: https://<YOUR_SUPABASE_PROJECT_ID>.supabase.co
 Environments: Production, Preview
 
 NEXT_PUBLIC_SUPABASE_ANON_KEY
-Value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1pcHlha2lzeXdkb2ZjenFheGxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMzOTIyMDgsImV4cCI6MjA3ODk2ODIwOH0.58008bNoWN5NWl_RyG2bpTxq0CFMrH-FBF20driila0
+Value: <YOUR_SUPABASE_ANON_KEY>
 Environments: Production, Preview
 
 JWT_SECRET
-Value: YyJ4jArSdu1ERU/gV7fi9ZtvIx/SQXxhRoSnXzQlT58PEmX1q2IhC/aS415zKOBB
+Value: <GENERATED_JWT_SECRET>
 Environments: Production, Preview
 
 JWT_EXPIRATION
@@ -117,7 +117,7 @@ Value: 7d
 Environments: Production, Preview
 
 WEBHOOK_SECRET
-Value: vEwvShd1PLbd9quEnAzIw/J2cy4kYCgjSR/WyAXD8+5yJZbrIJROIYCiiPA0iwvn
+Value: <GENERATED_WEBHOOK_SECRET>
 Environments: Production, Preview
 
 NODE_ENV
@@ -129,7 +129,7 @@ Value: 3001
 Environments: Production, Preview
 
 API_BASE_URL
-Value: https://levymate-api.vercel.app
+Value: <YOUR_API_BASE_URL>
 Environments: Production, Preview
 
 LOG_LEVEL
@@ -223,7 +223,7 @@ Before going live:
 
 ### Connection Error: "connect ECONNREFUSED"
 - **Cause**: Wrong host or SSL not enabled
-- **Solution**: Ensure `DB_SSL=true` and host is `db.mipyakisywdofczqaxlb.supabase.co`
+- **Solution**: Ensure `DB_SSL=true` and host matches `<YOUR_DB_HOST>`
 
 ### Variable Not Found in Code
 - **Cause**: Vercel didn't pick up the new environment variables

@@ -1,7 +1,7 @@
 # 📋 Vercel Environment Variables Checklist
 
 ## Instructions
-1. Go to your Supabase Dashboard: https://app.supabase.com/projects/mipyakisywdofczqaxlb
+1. Go to your Supabase Dashboard: https://app.supabase.com/projects/<YOUR_SUPABASE_PROJECT_ID>
 2. Gather each variable below
 3. Provide them to me in the format shown
 4. I'll add them all to Vercel automatically
@@ -28,7 +28,7 @@
 - Use the one that starts with `postgresql://`
 
 **Variable Name:** `DATABASE_URL`
-**Format:** `postgresql://postgres:YOUR_PASSWORD@db.mipyakisywdofczqaxlb.supabase.co:5432/postgres?sslmode=require`
+**Format:** `postgresql://postgres:YOUR_PASSWORD@<YOUR_DB_HOST>:5432/postgres?sslmode=require`
 **Your Value:** `[PASTE HERE]`
 
 ---
@@ -39,7 +39,7 @@
 - Copy "Project URL"
 
 **Variable Name:** `NEXT_PUBLIC_SUPABASE_URL`
-**Your Value:** `https://mipyakisywdofczqaxlb.supabase.co`
+**Your Value:** `https://<YOUR_SUPABASE_PROJECT_ID>.supabase.co`
 (Usually already correct - confirm it matches your project)
 
 ---
@@ -125,12 +125,12 @@ Once you have all the values, provide them like this:
 
 ```
 DB_PASSWORD=your_actual_password_here
-DATABASE_URL=postgresql://postgres:your_password@db.mipyakisywdofczqaxlb.supabase.co:5432/postgres?sslmode=require
-NEXT_PUBLIC_SUPABASE_URL=https://mipyakisywdofczqaxlb.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-JWT_SECRET=k7jF2nL9pQ6wX8mK3vR5dY2zB4hG1sT9uJ6cL0fD3eN5qW2rP8sA1bM4oX7yV
-WEBHOOK_SECRET=a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6A7B8C9D
+DATABASE_URL=postgresql://postgres:your_password@<YOUR_DB_HOST>:5432/postgres?sslmode=require
+NEXT_PUBLIC_SUPABASE_URL=https://<YOUR_SUPABASE_PROJECT_ID>.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<YOUR_SUPABASE_ANON_KEY>
+SUPABASE_SERVICE_ROLE_KEY=<YOUR_SUPABASE_SERVICE_ROLE_KEY>
+JWT_SECRET=<GENERATED_JWT_SECRET>
+WEBHOOK_SECRET=<GENERATED_WEBHOOK_SECRET>
 PAYSTACK_SECRET_KEY=[OPTIONAL]
 OPENAI_API_KEY=[OPTIONAL]
 ```

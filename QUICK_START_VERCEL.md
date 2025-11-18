@@ -11,11 +11,11 @@
 ## 📊 WHAT WAS COMPLETED
 
 ### 1️⃣ Credentials Retrieved & Generated
-- ✅ Database Password: `$Arianna600104#`
-- ✅ Database Host: `db.mipyakisywdofczqaxlb.supabase.co`
+- ✅ Database Password: collected from Supabase and stored securely
+- ✅ Database Host: configured in Supabase
 - ✅ JWT Secret: Generated (64 chars, cryptographically secure)
 - ✅ Webhook Secret: Generated (64 chars, cryptographically secure)
-- ✅ Supabase Project URL: `https://mipyakisywdofczqaxlb.supabase.co`
+- ✅ Supabase Project URL: recorded for reference
 - ✅ API Keys: Retrieved (Anon key included)
 
 ### 2️⃣ Files Created
@@ -86,23 +86,23 @@ Expected: { "status": "ok", "database": "connected", ... }
 ```
 KEY                              VALUE
 ─────────────────────────────────────────────────────────────
-DB_HOST                          db.mipyakisywdofczqaxlb.supabase.co
-DB_PORT                          5432
-DB_USER                          postgres
-DB_PASSWORD                      $Arianna600104#
-DB_NAME                          postgres
+DB_HOST                          <YOUR_DB_HOST>
+DB_PORT                          <YOUR_DB_PORT>
+DB_USER                          <YOUR_DB_USER>
+DB_PASSWORD                      <YOUR_DB_PASSWORD>
+DB_NAME                          <YOUR_DB_NAME>
 DB_SSL                           true
-DATABASE_URL                     postgresql://postgres:%24Arianna600104%23@db.mipyakisywdofczqaxlb.supabase.co:5432/postgres?sslmode=require
-SUPABASE_URL                     https://mipyakisywdofczqaxlb.supabase.co
-SUPABASE_ANON_KEY                eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-NEXT_PUBLIC_SUPABASE_URL         https://mipyakisywdofczqaxlb.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-JWT_SECRET                       YyJ4jArSdu1ERU/gV7fi9ZtvIx/SQXxhRoSnXzQlT58PEmX1q2IhC/aS415zKOBB
+DATABASE_URL                     postgresql://<YOUR_DB_USER>:<URL_ENCODED_DB_PASSWORD>@<YOUR_DB_HOST>:<YOUR_DB_PORT>/<YOUR_DB_NAME>?sslmode=require
+SUPABASE_URL                     https://<YOUR_SUPABASE_PROJECT_ID>.supabase.co
+SUPABASE_ANON_KEY                <YOUR_SUPABASE_ANON_KEY>
+NEXT_PUBLIC_SUPABASE_URL         https://<YOUR_SUPABASE_PROJECT_ID>.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY    <YOUR_SUPABASE_ANON_KEY>
+JWT_SECRET                       <GENERATED_JWT_SECRET>
 JWT_EXPIRATION                   7d
-WEBHOOK_SECRET                   vEwvShd1PLbd9quEnAzIw/J2cy4kYCgjSR/WyAXD8+5yJZbrIJROIYCiiPA0iwvn
+WEBHOOK_SECRET                   <GENERATED_WEBHOOK_SECRET>
 NODE_ENV                         production
 PORT                             3001
-API_BASE_URL                     https://levymate-api.vercel.app
+API_BASE_URL                     <YOUR_API_BASE_URL>
 LOG_LEVEL                        info
 ```
 

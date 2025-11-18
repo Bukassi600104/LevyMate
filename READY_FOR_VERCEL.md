@@ -4,8 +4,8 @@
 
 ### Credentials Generated & Configured
 ✅ **Database Connection**: Supabase PostgreSQL configured  
-✅ **JWT Secret**: `YyJ4jArSdu1ERU/gV7fi9ZtvIx/SQXxhRoSnXzQlT58PEmX1q2IhC/aS415zKOBB`  
-✅ **Webhook Secret**: `vEwvShd1PLbd9quEnAzIw/J2cy4kYCgjSR/WyAXD8+5yJZbrIJROIYCiiPA0iwvn`  
+✅ **JWT Secret**: generated and stored securely  
+✅ **Webhook Secret**: generated and stored securely  
 ✅ **Connection String**: URL-encoded for special characters in password  
 
 ### Files Created
@@ -30,23 +30,23 @@ You now have everything needed to deploy to Vercel:
 ### Quick Reference: All 18 Environment Variables
 
 ```
-1. DB_HOST = db.mipyakisywdofczqaxlb.supabase.co
-2. DB_PORT = 5432
-3. DB_USER = postgres
-4. DB_PASSWORD = $Arianna600104#
-5. DB_NAME = postgres
+1. DB_HOST = <YOUR_DB_HOST>
+2. DB_PORT = <YOUR_DB_PORT>
+3. DB_USER = <YOUR_DB_USER>
+4. DB_PASSWORD = <YOUR_DB_PASSWORD>
+5. DB_NAME = <YOUR_DB_NAME>
 6. DB_SSL = true
-7. DATABASE_URL = postgresql://postgres:%24Arianna600104%23@db.mipyakisywdofczqaxlb.supabase.co:5432/postgres?sslmode=require
-8. SUPABASE_URL = https://mipyakisywdofczqaxlb.supabase.co
-9. SUPABASE_ANON_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1pcHlha2lzeXdkb2ZjenFheGxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMzOTIyMDgsImV4cCI6MjA3ODk2ODIwOH0.58008bNoWN5NWl_RyG2bpTxq0CFMrH-FBF20driila0
-10. NEXT_PUBLIC_SUPABASE_URL = https://mipyakisywdofczqaxlb.supabase.co
-11. NEXT_PUBLIC_SUPABASE_ANON_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1pcHlha2lzeXdkb2ZjenFheGxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMzOTIyMDgsImV4cCI6MjA3ODk2ODIwOH0.58008bNoWN5NWl_RyG2bpTxq0CFMrH-FBF20driila0
-12. JWT_SECRET = YyJ4jArSdu1ERU/gV7fi9ZtvIx/SQXxhRoSnXzQlT58PEmX1q2IhC/aS415zKOBB
+7. DATABASE_URL = postgresql://<YOUR_DB_USER>:<URL_ENCODED_DB_PASSWORD>@<YOUR_DB_HOST>:<YOUR_DB_PORT>/<YOUR_DB_NAME>?sslmode=require
+8. SUPABASE_URL = https://<YOUR_SUPABASE_PROJECT_ID>.supabase.co
+9. SUPABASE_ANON_KEY = <YOUR_SUPABASE_ANON_KEY>
+10. NEXT_PUBLIC_SUPABASE_URL = https://<YOUR_SUPABASE_PROJECT_ID>.supabase.co
+11. NEXT_PUBLIC_SUPABASE_ANON_KEY = <YOUR_SUPABASE_ANON_KEY>
+12. JWT_SECRET = <GENERATED_JWT_SECRET>
 13. JWT_EXPIRATION = 7d
-14. WEBHOOK_SECRET = vEwvShd1PLbd9quEnAzIw/J2cy4kYCgjSR/WyAXD8+5yJZbrIJROIYCiiPA0iwvn
+14. WEBHOOK_SECRET = <GENERATED_WEBHOOK_SECRET>
 15. NODE_ENV = production
 16. PORT = 3001
-17. API_BASE_URL = https://levymate-api.vercel.app
+17. API_BASE_URL = <YOUR_API_BASE_URL>
 18. LOG_LEVEL = info
 ```
 

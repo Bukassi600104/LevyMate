@@ -11,23 +11,23 @@ Below are all the environment variables you need to add to Vercel for the LevyMa
 ### Copy each variable below and add to Vercel (Settings → Environment Variables)
 
 ```
-DB_HOST=db.mipyakisywdofczqaxlb.supabase.co
-DB_PORT=5432
-DB_USER=postgres
-DB_PASSWORD=$Arianna600104#
-DB_NAME=postgres
+DB_HOST=<YOUR_DB_HOST>
+DB_PORT=<YOUR_DB_PORT>
+DB_USER=<YOUR_DB_USER>
+DB_PASSWORD=<YOUR_DB_PASSWORD>
+DB_NAME=<YOUR_DB_NAME>
 DB_SSL=true
-DATABASE_URL=postgresql://postgres:$Arianna600104#@db.mipyakisywdofczqaxlb.supabase.co:5432/postgres?sslmode=require
-SUPABASE_URL=https://mipyakisywdofczqaxlb.supabase.co
-SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1pcHlha2lzeXdkb2ZjenFheGxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMzOTIyMDgsImV4cCI6MjA3ODk2ODIwOH0.58008bNoWN5NWl_RyG2bpTxq0CFMrH-FBF20driila0
-NEXT_PUBLIC_SUPABASE_URL=https://mipyakisywdofczqaxlb.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1pcHlha2lzeXdkb2ZjenFheGxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMzOTIyMDgsImV4cCI6MjA3ODk2ODIwOH0.58008bNoWN5NWl_RyG2bpTxq0CFMrH-FBF20driila0
-JWT_SECRET=YyJ4jArSdu1ERU/gV7fi9ZtvIx/SQXxhRoSnXzQlT58PEmX1q2IhC/aS415zKOBB
+DATABASE_URL=postgresql://<YOUR_DB_USER>:<URL_ENCODED_DB_PASSWORD>@<YOUR_DB_HOST>:<YOUR_DB_PORT>/<YOUR_DB_NAME>?sslmode=require
+SUPABASE_URL=https://<YOUR_SUPABASE_PROJECT_ID>.supabase.co
+SUPABASE_ANON_KEY=<YOUR_SUPABASE_ANON_KEY>
+NEXT_PUBLIC_SUPABASE_URL=https://<YOUR_SUPABASE_PROJECT_ID>.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<YOUR_SUPABASE_ANON_KEY>
+JWT_SECRET=<GENERATED_JWT_SECRET>
 JWT_EXPIRATION=7d
-WEBHOOK_SECRET=vEwvShd1PLbd9quEnAzIw/J2cy4kYCgjSR/WyAXD8+5yJZbrIJROIYCiiPA0iwvn
+WEBHOOK_SECRET=<GENERATED_WEBHOOK_SECRET>
 NODE_ENV=production
 PORT=3001
-API_BASE_URL=https://levymate-api.vercel.app
+API_BASE_URL=<YOUR_API_BASE_URL>
 LOG_LEVEL=info
 ```
 
@@ -37,24 +37,24 @@ LOG_LEVEL=info
 
 | Variable | Value | Type | Visibility |
 |----------|-------|------|-----------|
-| `DB_HOST` | db.mipyakisywdofczqaxlb.supabase.co | Required | Backend only |
-| `DB_PORT` | 5432 | Required | Backend only |
-| `DB_USER` | postgres | Required | Backend only |
-| `DB_PASSWORD` | $Arianna600104# | Required | Backend only |
-| `DB_NAME` | postgres | Required | Backend only |
-| `DB_SSL` | true | Required | Backend only |
-| `DATABASE_URL` | postgresql://... | Required | Backend only |
-| `SUPABASE_URL` | https://mipyakisywdofczqaxlb.supabase.co | Required | Backend only |
-| `SUPABASE_ANON_KEY` | eyJhbGci... | Required | Backend only |
-| `NEXT_PUBLIC_SUPABASE_URL` | https://mipyakisywdofczqaxlb.supabase.co | Required | Public (frontend) |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | eyJhbGci... | Required | Public (frontend) |
-| `JWT_SECRET` | YyJ4jArSdu1... | Required | Backend only |
-| `JWT_EXPIRATION` | 7d | Required | Backend only |
-| `WEBHOOK_SECRET` | vEwvShd1... | Required | Backend only |
-| `NODE_ENV` | production | Required | Backend only |
-| `PORT` | 3001 | Required | Backend only |
-| `API_BASE_URL` | https://levymate-api.vercel.app | Required | Backend only |
-| `LOG_LEVEL` | info | Optional | Backend only |
+| `DB_HOST` | `<YOUR_DB_HOST>` | Required | Backend only |
+| `DB_PORT` | `<YOUR_DB_PORT>` | Required | Backend only |
+| `DB_USER` | `<YOUR_DB_USER>` | Required | Backend only |
+| `DB_PASSWORD` | `<YOUR_DB_PASSWORD>` | Required | Backend only |
+| `DB_NAME` | `<YOUR_DB_NAME>` | Required | Backend only |
+| `DB_SSL` | `true` | Required | Backend only |
+| `DATABASE_URL` | `postgresql://<YOUR_DB_USER>:<URL_ENCODED_DB_PASSWORD>@<YOUR_DB_HOST>:<YOUR_DB_PORT>/<YOUR_DB_NAME>?sslmode=require` | Required | Backend only |
+| `SUPABASE_URL` | `https://<YOUR_SUPABASE_PROJECT_ID>.supabase.co` | Required | Backend only |
+| `SUPABASE_ANON_KEY` | `<YOUR_SUPABASE_ANON_KEY>` | Required | Backend only |
+| `NEXT_PUBLIC_SUPABASE_URL` | `https://<YOUR_SUPABASE_PROJECT_ID>.supabase.co` | Required | Public (frontend) |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | `<YOUR_SUPABASE_ANON_KEY>` | Required | Public (frontend) |
+| `JWT_SECRET` | `<GENERATED_JWT_SECRET>` | Required | Backend only |
+| `JWT_EXPIRATION` | `7d` | Required | Backend only |
+| `WEBHOOK_SECRET` | `<GENERATED_WEBHOOK_SECRET>` | Required | Backend only |
+| `NODE_ENV` | `production` | Required | Backend only |
+| `PORT` | `3001` | Required | Backend only |
+| `API_BASE_URL` | `<YOUR_API_BASE_URL>` | Required | Backend only |
+| `LOG_LEVEL` | `info` | Optional | Backend only |
 
 ---
 
@@ -80,11 +80,11 @@ LOG_LEVEL=info
 
 ## ⚠️ Important Notes
 
-1. **DB_PASSWORD contains special characters** (`$#`) - copy exactly as shown
-2. **NEXT_PUBLIC_ variables are public** - they're meant to be exposed in frontend code
-3. **Other variables are private** - they should NOT be exposed to the frontend
-4. **JWT_SECRET and WEBHOOK_SECRET are unique** - they were generated just now
-5. **Never commit `.env` to Git** - it's already in `.gitignore`
+1. **DB_PASSWORD must be copied exactly** – include any special characters from your Supabase password
+2. **NEXT_PUBLIC_ variables are public** – they're meant to be exposed in frontend code
+3. **Other variables are private** – they should NOT be exposed to the frontend
+4. **JWT_SECRET and WEBHOOK_SECRET should be unique** – generate new random values for each environment
+5. **Never commit `.env` to Git** – it's already in `.gitignore`
 
 ---
 
@@ -115,7 +115,7 @@ curl https://levymate-api.vercel.app/health
 
 **Project URL**: https://levymate-api.vercel.app (after deployment)
 
-**Database**: PostgreSQL via Supabase (mipyakisywdofczqaxlb)
+**Database**: PostgreSQL via Supabase (<YOUR_SUPABASE_PROJECT_ID>)
 
 ---
 

@@ -2,8 +2,8 @@
 
 ## Project Reference
 - **Project Name**: LevyMate
-- **Project ID**: mipyakisywdofczqaxlb
-- **Dashboard Link**: https://app.supabase.com/projects/mipyakisywdofczqaxlb
+- **Project ID**: <YOUR_SUPABASE_PROJECT_ID>
+- **Dashboard Link**: https://app.supabase.com/projects/<YOUR_SUPABASE_PROJECT_ID>
 
 ---
 
@@ -12,7 +12,7 @@
 ### Step-by-Step Navigation:
 
 1. **Open Supabase Dashboard**
-   - Go to: https://app.supabase.com/projects/mipyakisywdofczqaxlb
+   - Go to: https://app.supabase.com/projects/<YOUR_SUPABASE_PROJECT_ID>
    - You should see your project displayed
 
 2. **Navigate to Database Settings**
@@ -59,19 +59,19 @@ DB_PASSWORD=[PASTE_REVEALED_PASSWORD_HERE]
 3. **Copy PostgreSQL Connection String**
    - Find the tab or section labeled: **"PostgreSQL"** or **"URI"**
    - The string starts with: `postgresql://`
-   - It looks like: `postgresql://postgres:[PASSWORD]@db.mipyakisywdofczqaxlb.supabase.co:5432/postgres`
+   - It looks like: `postgresql://postgres:[PASSWORD]@<YOUR_DB_HOST>:5432/postgres`
 
 4. **Replace [PASSWORD] with Your Actual Password**
    - Copy the connection string
    - Replace `[PASSWORD]` with the password you revealed in Part 1
    - Example result:
      ```
-     postgresql://postgres:MyActualPassword123@db.mipyakisywdofczqaxlb.supabase.co:5432/postgres?sslmode=require
+     postgresql://postgres:MyActualPassword123@<YOUR_DB_HOST>:5432/postgres?sslmode=require
      ```
 
 **Your Database URL Variable:**
 ```
-DATABASE_URL=postgresql://postgres:[YOUR_DB_PASSWORD]@db.mipyakisywdofczqaxlb.supabase.co:5432/postgres?sslmode=require
+DATABASE_URL=postgresql://postgres:[YOUR_DB_PASSWORD]@<YOUR_DB_HOST>:5432/postgres?sslmode=require
 ```
 
 ---
@@ -81,7 +81,7 @@ DATABASE_URL=postgresql://postgres:[YOUR_DB_PASSWORD]@db.mipyakisywdofczqaxlb.su
 ### Step-by-Step Navigation:
 
 1. **Open Supabase Dashboard**
-   - Go to: https://app.supabase.com/projects/mipyakisywdofczqaxlb
+   - Go to: https://app.supabase.com/projects/<YOUR_SUPABASE_PROJECT_ID>
    - You're back at the main project view
 
 2. **Navigate to API Settings**
@@ -97,7 +97,7 @@ DATABASE_URL=postgresql://postgres:[YOUR_DB_PASSWORD]@db.mipyakisywdofczqaxlb.su
 
 4. **Find Project URL**
    - On the API settings page, look for: **"Project URL"**
-   - It should display: `https://mipyakisywdofczqaxlb.supabase.co`
+   - It should display: `https://<YOUR_SUPABASE_PROJECT_ID>.supabase.co`
    - This is your **SUPABASE_URL**
    - Click the copy icon (📋) next to it
 
@@ -123,7 +123,7 @@ DATABASE_URL=postgresql://postgres:[YOUR_DB_PASSWORD]@db.mipyakisywdofczqaxlb.su
 
 **Your Supabase URL & Keys Variables:**
 ```
-NEXT_PUBLIC_SUPABASE_URL=https://mipyakisywdofczqaxlb.supabase.co
+NEXT_PUBLIC_SUPABASE_URL=https://<YOUR_SUPABASE_PROJECT_ID>.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=[PASTE_ANON_KEY_HERE]
 SUPABASE_SERVICE_ROLE_KEY=[PASTE_SERVICE_ROLE_KEY_HERE]
 ```
@@ -162,13 +162,13 @@ WEBHOOK_SECRET=[PASTE_OUTPUT_HERE]
 
 | Variable | Where It Came From | Example |
 |----------|-------------------|---------|
-| `DB_PASSWORD` | Supabase → Settings → Database (Reveal button) | `ActualPassword123` |
-| `DATABASE_URL` | Supabase → Settings → Database (Connection String) | `postgresql://postgres:PASSWORD@db.xxx.supabase.co:5432/postgres?sslmode=require` |
-| `NEXT_PUBLIC_SUPABASE_URL` | Supabase → Settings → API (Project URL) | `https://mipyakisywdofczqaxlb.supabase.co` |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase → Settings → API (Anon Key) | `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...` |
-| `SUPABASE_SERVICE_ROLE_KEY` | Supabase → Settings → API (Service Role) | `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...` |
-| `JWT_SECRET` | Generated in Terminal | `k7jF2nL9pQ6wX8mK3vR5dY2zB4hG1sT9uJ6cL0...` |
-| `WEBHOOK_SECRET` | Generated in Terminal | `a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9...` |
+| `DB_PASSWORD` | Supabase → Settings → Database (Reveal button) | `your-actual-db-password` |
+| `DATABASE_URL` | Supabase → Settings → Database (Connection String) | `postgresql://postgres:PASSWORD@<YOUR_DB_HOST>:5432/postgres?sslmode=require` |
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase → Settings → API (Project URL) | `https://<YOUR_SUPABASE_PROJECT_ID>.supabase.co` |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase → Settings → API (Anon Key) | `eyJhbGci...` |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase → Settings → API (Service Role) | `eyJhbGci...` |
+| `JWT_SECRET` | Generated in Terminal | `randomly-generated-secret` |
+| `WEBHOOK_SECRET` | Generated in Terminal | `randomly-generated-secret` |
 
 ---
 
@@ -178,12 +178,12 @@ Once you have ALL values, provide them in this exact format:
 
 ```
 DB_PASSWORD=your_password_here
-DATABASE_URL=postgresql://postgres:your_password_here@db.mipyakisywdofczqaxlb.supabase.co:5432/postgres?sslmode=require
-NEXT_PUBLIC_SUPABASE_URL=https://mipyakisywdofczqaxlb.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1pcHlha2lzeXdkb2ZjenFheGxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMzOTIyMDgsImV4cCI6MjA3ODk2ODIwOH0.58008bNoWN5NWl_RyG2bpTxq0CFMrH-FBF20driila0
-SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1pcHlha2lzeXdkb2ZjenFheGxiIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MzM5MjIwOCwiZXhwIjoyMDc4OTY4MjA4fQ.your_service_key
-JWT_SECRET=k7jF2nL9pQ6wX8mK3vR5dY2zB4hG1sT9uJ6cL0fD3eN5qW2rP8sA1bM4oX7yV
-WEBHOOK_SECRET=a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6A7B8C9D
+DATABASE_URL=postgresql://postgres:your_password_here@<YOUR_DB_HOST>:5432/postgres?sslmode=require
+NEXT_PUBLIC_SUPABASE_URL=https://<YOUR_SUPABASE_PROJECT_ID>.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<YOUR_SUPABASE_ANON_KEY>
+SUPABASE_SERVICE_ROLE_KEY=<YOUR_SUPABASE_SERVICE_ROLE_KEY>
+JWT_SECRET=<GENERATED_JWT_SECRET>
+WEBHOOK_SECRET=<GENERATED_WEBHOOK_SECRET>
 ```
 
 ---
@@ -220,4 +220,4 @@ WEBHOOK_SECRET=a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6A7B8C9D
 ---
 
 **Last Updated**: November 18, 2025
-**Project**: LevyMate (mipyakisywdofczqaxlb)
+**Project**: LevyMate (<YOUR_SUPABASE_PROJECT_ID>)

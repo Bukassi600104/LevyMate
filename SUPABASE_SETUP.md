@@ -9,9 +9,9 @@ Your LevyMate backend is now configured to use **Supabase PostgreSQL** as the da
 
 | Setting | Value |
 |---------|-------|
-| **Project ID** | `mipyakisywdofczqaxlb` |
-| **Project URL** | `https://mipyakisywdofczqaxlb.supabase.co` |
-| **Database Host** | `mipyakisywdofczqaxlb.supabase.co` |
+| **Project ID** | `<YOUR_SUPABASE_PROJECT_ID>` |
+| **Project URL** | `https://<YOUR_SUPABASE_PROJECT_ID>.supabase.co` |
+| **Database Host** | `<YOUR_DB_HOST>` |
 | **Database Port** | `5432` |
 | **Database Name** | `postgres` |
 | **Default Database User** | `postgres` |
@@ -22,22 +22,22 @@ Your LevyMate backend is now configured to use **Supabase PostgreSQL** as the da
 
 ### From Supabase Dashboard:
 
-1. **Go to** https://app.supabase.com/projects/mipyakisywdofczqaxlb/settings/api
+1. **Go to** https://app.supabase.com/projects/<YOUR_SUPABASE_PROJECT_ID>/settings/api
 2. **Copy These Keys:**
    - ✅ **SUPABASE_URL** (already in .env.example):
      ```
-     https://mipyakisywdofczqaxlb.supabase.co
+     https://<YOUR_SUPABASE_PROJECT_ID>.supabase.co
      ```
    - ✅ **SUPABASE_ANON_KEY** (already in .env.example):
      ```
-     eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1pcHlha2lzeXdkb2ZjenFheGxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMzOTIyMDgsImV4cCI6MjA3ODk2ODIwOH0.58008bNoWN5NWl_RyG2bpTxq0CFMrH-FBF20driila0
+     <YOUR_SUPABASE_ANON_KEY>
      ```
    - ⚠️ **SUPABASE_SERVICE_KEY** (for backend only, keep secret):
      - Go to Settings → API → Service Role Key
      - Copy this value (used for migrations and admin operations)
 
 3. **Get Database Password:**
-   - Go to https://app.supabase.com/projects/mipyakisywdofczqaxlb/settings/database
+   - Go to https://app.supabase.com/projects/<YOUR_SUPABASE_PROJECT_ID>/settings/database
    - Click "Reset database password" and set a strong password
    - Save this password for `DB_PASSWORD`
 
@@ -49,7 +49,7 @@ Create `api/.env` with your actual credentials:
 
 ```bash
 # Database Configuration (Supabase PostgreSQL)
-DB_HOST=mipyakisywdofczqaxlb.supabase.co
+DB_HOST=<YOUR_DB_HOST>
 DB_PORT=5432
 DB_USERNAME=postgres
 DB_PASSWORD=your-actual-password-from-supabase
@@ -67,8 +67,8 @@ JWT_SECRET=your-actual-jwt-secret-key-min-32-chars
 WEBHOOK_SECRET=your-actual-webhook-secret-key
 
 # Supabase Configuration
-SUPABASE_URL=https://mipyakisywdofczqaxlb.supabase.co
-SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1pcHlha2lzeXdkb2ZjenFheGxiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMzOTIyMDgsImV4cCI6MjA3ODk2ODIwOH0.58008bNoWN5NWl_RyG2bpTxq0CFMrH-FBF20driila0
+SUPABASE_URL=https://<YOUR_SUPABASE_PROJECT_ID>.supabase.co
+SUPABASE_ANON_KEY=<YOUR_SUPABASE_ANON_KEY>
 SUPABASE_SERVICE_KEY=your-service-role-key-from-supabase
 
 # External Services
@@ -99,7 +99,7 @@ This will create:
 - Indexes and relationships
 
 **Verify in Supabase Dashboard:**
-- Go to https://app.supabase.com/projects/mipyakisywdofczqaxlb/editor
+- Go to https://app.supabase.com/projects/<YOUR_SUPABASE_PROJECT_ID>/editor
 - You should see all 4 tables listed on the left
 
 ---
@@ -150,7 +150,7 @@ Once everything works locally, deploy to Vercel with these environment variables
 
 | Variable Name | Value | Environments |
 |---|---|---|
-| `DB_HOST` | `mipyakisywdofczqaxlb.supabase.co` | Production, Preview |
+| `DB_HOST` | `<YOUR_DB_HOST>` | Production, Preview |
 | `DB_PORT` | `5432` | Production, Preview |
 | `DB_USERNAME` | `postgres` | Production, Preview |
 | `DB_PASSWORD` | Your Supabase password | Production, Preview |
@@ -158,7 +158,7 @@ Once everything works locally, deploy to Vercel with these environment variables
 | `DB_SSL` | `require` | Production, Preview |
 | `JWT_SECRET` | Your secure JWT secret (32+ chars) | Production, Preview |
 | `WEBHOOK_SECRET` | Your secure webhook secret | Production, Preview |
-| `SUPABASE_URL` | `https://mipyakisywdofczqaxlb.supabase.co` | Production, Preview |
+| `SUPABASE_URL` | `https://<YOUR_SUPABASE_PROJECT_ID>.supabase.co` | Production, Preview |
 | `SUPABASE_ANON_KEY` | Your anon key (from step 1) | Production, Preview |
 | `SUPABASE_SERVICE_KEY` | Your service role key | Production, Preview |
 | `NODE_ENV` | `production` | Production, Preview |
@@ -183,7 +183,7 @@ If you're deploying the Next.js frontend to Vercel as well:
 1. **Frontend Environment Variables** (in Vercel):
    ```
    NEXT_PUBLIC_API_URL=https://your-api-domain.vercel.app
-   NEXT_PUBLIC_SUPABASE_URL=https://mipyakisywdofczqaxlb.supabase.co
+   NEXT_PUBLIC_SUPABASE_URL=https://<YOUR_SUPABASE_PROJECT_ID>.supabase.co
    NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
    ```
    
@@ -195,7 +195,7 @@ If you're deploying the Next.js frontend to Vercel as well:
 
 For enhanced security, enable RLS policies in Supabase:
 
-1. Go to https://app.supabase.com/projects/mipyakisywdofczqaxlb/auth/policies
+1. Go to https://app.supabase.com/projects/<YOUR_SUPABASE_PROJECT_ID>/auth/policies
 2. Enable RLS for each table
 3. Add policies that match your application logic
 
