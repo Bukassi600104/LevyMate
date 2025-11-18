@@ -35,3 +35,22 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Security - never commit secrets
+*.env
+.env*
+*.secret
+*.key
+.aws
+.ssh
+
+# Documentation with secrets (for local reference only)
+*VERCEL_ENV*
+*CREDENTIALS*
+*READY_FOR*
+*QUICK_START*
+*add-vercel*
+
+# Build artifacts
+api/.env
+api/dist/
