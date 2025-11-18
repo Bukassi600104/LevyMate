@@ -45,6 +45,9 @@ next-env.d.ts
 .ssh
 
 # Documentation with secrets (for local reference only)
+# EXCEPTION: Safe documentation files are allowed
+!/VERCEL_ENV_SETUP_GUIDE.md
+!/SECURITY_AUDIT_REPORT.md
 *VERCEL_ENV*
 *CREDENTIALS*
 *READY_FOR*
