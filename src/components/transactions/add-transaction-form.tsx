@@ -2,6 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import { useAppStore } from '@/store/app-store'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -562,9 +563,11 @@ export function AddTransactionForm() {
                         </Button>
                       </div>
                       {attachment.previewUrl && (
-                        <img
+                        <Image
                           src={attachment.previewUrl}
                           alt={attachment.fileName}
+                          width={300}
+                          height={128}
                           className="mt-3 h-32 w-full rounded-md object-cover"
                         />
                       )}

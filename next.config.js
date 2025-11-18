@@ -13,8 +13,6 @@ const nextConfig = {
     
     return config;
   },
-  // Ensure api folder is not included in build
-  exclude: ['api/**/*'],
 }
 
 module.exports = nextConfig
