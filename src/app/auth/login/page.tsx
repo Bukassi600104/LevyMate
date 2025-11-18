@@ -1,6 +1,8 @@
 import { AuthLayout } from '@/components/auth/auth-layout'
 import { LoginForm } from '@/components/auth/login-form'
 
+export const dynamic = 'force-static'
+
 export const metadata = {
   title: 'Sign in · LevyMate',
 }

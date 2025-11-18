@@ -2,6 +2,8 @@ import { Suspense } from 'react'
 import { MobileLayout } from '@/components/layout/mobile-layout'
 import { AddTransactionForm } from '@/components/transactions/add-transaction-form'
 
+export const dynamic = 'force-static'
+
 export default function AddPage() {
   return (
     <MobileLayout title="Add transaction" subtitle="Record income, expenses, and receipt uploads">

@@ -1,6 +1,8 @@
 import { AuthLayout } from '@/components/auth/auth-layout'
 import { ResetPasswordForm } from '@/components/auth/reset-password-form'
 
+export const dynamic = 'force-static'
+
 export const metadata = {
   title: 'Reset password · LevyMate',
 }

@@ -1,6 +1,8 @@
 import { MobileLayout } from '@/components/layout/mobile-layout'
 import { ProfilePage } from '@/components/profile/profile-page'
 
+export const dynamic = 'force-static'
+
 export default function ProfilePageRoute() {
   return (
     <MobileLayout>

@@ -1,6 +1,8 @@
 import { AuthLayout } from '@/components/auth/auth-layout'
 import { WelcomeScreen } from '@/components/auth/welcome-screen'
 
+export const dynamic = 'force-static'
+
 export const metadata = {
   title: 'Welcome · LevyMate',
 }
