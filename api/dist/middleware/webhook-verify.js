@@ -8,10 +8,23 @@ const crypto_1 = __importDefault(require("crypto"));
 const verifyWebhookSignature = (req, res, next) => {
     try {
         const signature = req.headers["x-signature"];
+        if (!signature) {
+            return res.status(400).json({ error: "Missing signature header" });
+        }
         const rawBody = req.rawBody || JSON.stringify(req.body);
         const secret = process.env.WEBHOOK_SECRET || "webhook-secret";
-        const computed = crypto_1.default.createHmac("sha256", secret).update(rawBody).digest("hex");
-        if (!crypto_1.default.timingSafeEqual(Buffer.from(computed), Buffer.from(signature))) {
+        const computed = crypto_1.default
+            .createHmac("sha256", secret)
+            .update(rawBody)
+            .digest("hex");
+        // Use timingSafeEqual to prevent timing attacks
+        const computedBuffer = Buffer.from(computed);
+        const signatureBuffer = Buffer.from(signature);
+        // Check buffers are same length before comparing
+        if (computedBuffer.length !== signatureBuffer.length) {
+            return res.status(401).json({ error: "Invalid signature" });
+        }
+        if (!crypto_1.default.timingSafeEqual(computedBuffer, signatureBuffer)) {
             return res.status(401).json({ error: "Invalid signature" });
         }
         next();

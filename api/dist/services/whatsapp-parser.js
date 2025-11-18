@@ -6,8 +6,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.parseWhatsAppText = parseWhatsAppText;
 exports.normalizeAmount = normalizeAmount;
-// Currency patterns: ₦, NGN, N, naira
-const AMOUNT_PATTERN = /(?:NGN|₦|N\s?|naira\s?)?\s*([0-9]{1,3}(?:,[0-9]{3})*(?:\.[0-9]{1,2})?|[0-9]+(?:\.[0-9]{1,2})?)/gi;
+// Currency patterns: ₦, NGN, N, naira - match full amount numbers
+const AMOUNT_PATTERN = /(?:NGN|₦|N(?!\w)|naira)?\s*([0-9]{1,3}(?:,[0-9]{3})*(?:\.[0-9]{1,2})?|[0-9]+(?:\.[0-9]{1,2})?)/gi;
 // Date patterns: DD/MM/YYYY, YYYY-MM-DD, Month DD
 const DATE_PATTERN = /\b(\d{1,2}\/\d{1,2}\/\d{2,4}|\d{4}-\d{1,2}-\d{1,2}|\b[A-Za-z]{3,9}\s\d{1,2})\b/g;
 // Keywords for transaction type classification
@@ -26,15 +26,15 @@ function parseWhatsAppText(text) {
         const trimmed = line.trim();
         if (!trimmed)
             continue;
-        // Extract amounts
-        const amountMatches = Array.from(trimmed.matchAll(AMOUNT_PATTERN));
+        // Extract amounts with better pattern: look for currency symbols followed by numbers
+        const amountMatches = Array.from(trimmed.matchAll(/[₦NGN\s]*([0-9]{1,3}(?:,[0-9]{3})*(?:\.[0-9]{1,2})?|[0-9]+(?:\.[0-9]{1,2})?)\b/g));
         if (amountMatches.length === 0)
             continue;
         for (const match of amountMatches) {
             const amountStr = match[1].replace(/,/g, "");
             const amount = parseFloat(amountStr);
-            if (isNaN(amount) || amount <= 0)
-                continue;
+            if (isNaN(amount) || amount <= 0 || amount < 100)
+                continue; // Filter out noise
             // Extract date
             const dateMatch = trimmed.match(DATE_PATTERN);
             const date = dateMatch ? dateMatch[0] : undefined;
