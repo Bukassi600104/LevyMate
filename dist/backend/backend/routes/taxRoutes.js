@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const taxController_1 = require("../controllers/taxController");
+const auth_1 = require("../middleware/auth");
+const router = (0, express_1.Router)();
+router.get("/rules", auth_1.optionalAuth, taxController_1.getTaxRules);
+router.post("/rules", auth_1.authenticate, taxController_1.createTaxRule);
+router.get("/estimate", auth_1.authenticate, taxController_1.estimateTax);
+exports.default = router;
