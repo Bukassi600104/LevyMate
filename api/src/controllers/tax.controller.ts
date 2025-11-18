@@ -41,8 +41,8 @@ export class TaxController {
         return res.status(400).json({ error: "No tax rules available" });
       }
 
-      const totalIncome = incomes.reduce((sum: number, inc) => sum + Number(inc.amount), 0);
-      const totalExpenses = expenses.reduce((sum: number, exp) => sum + Number(exp.amount), 0);
+      const totalIncome = incomes.reduce((sum: number, inc: Income) => sum + Number(inc.amount), 0);
+      const totalExpenses = expenses.reduce((sum: number, exp: Expense) => sum + Number(exp.amount), 0);
       const taxableIncome = totalIncome - totalExpenses;
       const bands = latestRule.rule_json.pit_bands;
 
